@@ -1,11 +1,12 @@
 
-import { ListInput } from "../ListInput"
+import { LandingPage } from "../LandingPage"
+
 
 
 export function App() {
   return (
-    
-     <ListInput/>
+ 
+ <LandingPage/>
   
   )
 }

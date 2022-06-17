@@ -1,24 +1,28 @@
 import { Box, Button, List, ListItem, ListItemText, ListSubheader, TextField  } from "@mui/material";
-import {  useState } from "react";
-import { VisualList } from "../VisualList";
 
+interface Props{
+  input: string
+  setInput: (str: string) => void
+  values: string[]
+  setValues: (arr: string[]) => void
+  setSubmitted: (value: boolean) => void
+}
 
-export function ListInput() {
-  const [input, setInput] = useState("")
-const [values, setValues] = useState<string[]>([])
+export function ListInput({values, setValues, input, setInput, setSubmitted}: Props) {
+
 
 function addValues(value:string){
+  if(value === "") return
 setValues([...values, value])
-
 }
   return (
     <>
-    <Box display="flex" flexDirection="column" justifySelf="center" alignSelf="center">
-      <Box>
+    <Box display="flex"  justifySelf="center" alignSelf="center">
+      <Box display="flex" flexDirection="column">
       <TextField value={input} id="outlined-basic" label="Outlined" variant="outlined" type="number" onChange={(e)=>{setInput(e.target.value)}}/>
       <Button onClick={()=>{addValues(input)
          setInput("")}}>Add</Button>
-      <Button onClick={()=>{console.log(values)}}>Submit</Button>
+      <Button onClick={()=>{if(values.length > 0){setSubmitted(true)}}}>Submit</Button>
    
    {values.length > 0 ? (<List
       sx={{
@@ -28,6 +32,7 @@ setValues([...values, value])
         position: 'relative',
         overflow: 'auto',
         maxHeight: 300,
+        color: "white"
       }}
       subheader={<li />}
     >
@@ -40,7 +45,6 @@ setValues([...values, value])
         
     </List>): null} 
     </Box>
-    { values ? (<VisualList setValues={setValues} values={values}/>):null}
     </Box>
     </>
   )

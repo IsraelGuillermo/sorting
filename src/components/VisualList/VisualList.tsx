@@ -16,18 +16,18 @@ const useStyles = makeStyles(() => ({
         border:"solid",
         display:"flex",
         justifyContent:"center",
-        alignItems:"center"
-        
+        alignItems:"center", 
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
+        fontSize:8
     }
   
   }));
 
-
-
-
 export function VisualList({values, setValues}:Props) {
   const classes = useStyles()
-  const bubbleSort = (arr: string[]): void => {
+  const arr = values?.slice(0) || []
+  const bubbleSort = (): void => {
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length; j++) {
             if (parseInt(arr[j]) > parseInt(arr[j + 1])) {
@@ -35,18 +35,18 @@ export function VisualList({values, setValues}:Props) {
             }
         }
     }
-    console.log(arr)
 setValues && setValues(arr);
 }
+
   return (
     <Box>
          <Box display="flex" flexDirection="row" alignItems="flex-end">
-{values?.map((item)=>(
- <Box key={Math.random()} height={parseInt(item)/2} width={50} className={classes.root}>
+{values?.map((item, index)=>(
+ <Box key={index} height={parseInt(item)} width={50} className={classes.root}>
  {item}
      </Box>))}
     </Box>
-   {values && (<Button onClick={()=>bubbleSort(values)}>Bubble Sort</Button>)}
+   {values && values.length > 0 && (<Button onClick={bubbleSort}>Bubble Sort</Button>)}
     </Box>
  
   )
