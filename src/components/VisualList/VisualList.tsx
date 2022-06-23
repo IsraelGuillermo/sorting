@@ -5,7 +5,8 @@ import classNames from "classnames";
 
 interface Props {
   values?: string[]
-  setValues?: (arr: string[])=>void
+  // setValues?: (arr: string[])=>void
+
 }
 
 
@@ -34,6 +35,7 @@ const useStyles = makeStyles(() => ({
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
     fontSize:8,
+    transition: "all .5s"
 
 
 },root3:{
@@ -47,16 +49,19 @@ const useStyles = makeStyles(() => ({
   borderTopLeftRadius: 4,
   borderTopRightRadius: 4,
   fontSize:8,
+  transition: "all .5s"
 },
 
 }));
-export function VisualList({values, setValues}:Props) {
+export function VisualList({values}:Props) {
   const [j, setJ]= useState<number>(0)
   const [swap, setSwap] = useState<boolean>()
 const[completed, setCompleted]=useState(false)
+const [sorted, setSorted] = useState(values)
 
   const classes = useStyles()
   const arr = values?.slice(0) || []
+
 
 const delay = (time: number) => { return new Promise(resolve => setTimeout(resolve, time))}
 
@@ -70,9 +75,9 @@ const delay = (time: number) => { return new Promise(resolve => setTimeout(resol
         setSwap(true)
             setJ(j)
       console.log(swap)
-            await delay(800) 
+            await delay(1000) 
           if (parseInt(arr[j]) > parseInt(arr[j+1])) {
-            setValues && setValues(arr);
+            setSorted(arr);
             [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
             // await delay(1000) 
           
@@ -87,9 +92,9 @@ const delay = (time: number) => { return new Promise(resolve => setTimeout(resol
 
   return (
     <Box>
-         <Box display="flex" flexDirection="row" alignItems="flex-end">
+<Box position="relative" flexDirection="row" alignItems="flex-end">
 {values?.map((item, index)=>(
- <Box key={index} height={parseInt(item)} width={50} className={classNames(completed ? classes.root3 : index === j || index === j+1 ? classes.root : classes.root2)}>
+ <Box bottom={0} position="absolute" left={sorted && (sorted?.indexOf(item) * 50)} key={index} height={parseInt(item)} width={50} className={classNames(completed ? classes.root3 : sorted && sorted?.indexOf(item) === j || sorted && sorted?.indexOf(item) === j+1 ? classes.root : classes.root2)}>
  {item}
      </Box>))}
     </Box>
