@@ -11,4 +11,4 @@ export default {
   decorators: [decoratorCentered],
 }
 
-export const Example = () => <ListInput input="2" values={["1", "2"]} setValues={()=>console.log("values")} setInput={()=>console.log("input")} setSubmitted={()=> console.log("submitted")}/>
+export const Example = () => <ListInput input="2" values={["1", "2"]} setValues={() => console.log("values")} setInput={() => console.log("input")} setSubmitted={() => console.log("submitted")} />
