@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 interface Props {
   input: string
@@ -8,7 +8,7 @@ interface Props {
   setSubmitted: (value: boolean) => void
 }
 
-export function ListInput({ values, setValues, input, setInput, setSubmitted }: Props) {
+export function ListInput({ values, setValues, setSubmitted }: Props) {
 
 
   // function addValues(value: string) {
@@ -18,31 +18,28 @@ export function ListInput({ values, setValues, input, setInput, setSubmitted }: 
 
   function generateArray(value: number) {
     const randomArr: string[] = []
-    const min = 10
+    const min = 15
     const max = 150
     const difference = max - min
-    for (let i = 0; i < value; i++) {
+    for (let i = 0; i <= value; i++) {
       console.log(randomArr)
       const randomNum = Math.floor((Math.random() * difference)).toString()
       // values && setValues([...values, (Math.floor(Math.random())).toString()]);
-      if (!randomArr.includes(randomNum))
+      if (!randomArr.includes(randomNum) && parseInt(randomNum) > 15)
         randomArr.push(randomNum)
     }
     setValues(randomArr)
-    if (values.length > 0) {
-      setSubmitted(true)
-    }
   }
   console.log(values)
   return (
     <>
       <Box display="flex" justifySelf="center" alignSelf="center">
-        <Box display="flex" flexDirection="column">
-          <TextField value={input} id="outlined-basic" label="Outlined" variant="outlined" type="number" onChange={(e) => { setInput(e.target.value) }} />
+        <Box display="flex" flexDirection="column" my={2}>
+          {values.length > 0 && <Box>Array has been created, submit to continue</Box>}
           <Button onClick={() => {
-            generateArray(parseInt(input))
+            generateArray(Math.floor(Math.random() * 40))
           }
-          }>Add</Button>
+          }>Generate Random List</Button>
           <Button onClick={() => { if (values.length > 0) { setSubmitted(true) } }}>Submit</Button>
 
         </Box>

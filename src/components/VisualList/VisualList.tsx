@@ -9,44 +9,29 @@ interface Props {
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "blue",
-    borderColor: "black",
-    borderWidth: 1,
+    backgroundColor: "#83c5be",
+    borderColor: "#fff1e6",
+    borderWidth: .5,
     border: "solid",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    fontSize: 8,
     transition: "all .5s",
   },
   root2: {
-    backgroundColor: "red",
-    borderColor: "black",
-    borderWidth: 1,
+    backgroundColor: "#e76f51",
+    borderColor: "#fff1e6",
+    borderWidth: .5,
     border: "solid",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    fontSize: 8,
     transition: "all .5s",
   },
   root3: {
-    backgroundColor: "green",
-    borderColor: "black",
-    borderWidth: 1,
+    backgroundColor: "#2a9d8f",
+    borderColor: "#fff1e6",
+    borderWidth: .5,
     border: "solid",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    fontSize: 8,
     transition: "all .5s",
   },
+  container: {
+    margin: "0, auto"
+  }
 }))
 export function VisualList({ values }: Props) {
   const [j, setJ] = useState<number>(0)
@@ -64,7 +49,7 @@ export function VisualList({ values }: Props) {
     for (let i = arr.length; i > 0; i--) {
       for (let j = 0; j < i - 1; j++) {
         setJ(j)
-        await delay(1000)
+        await delay(300)
         if (parseInt(arr[j]) > parseInt(arr[j + 1])) {
           setSorted(arr)
             ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
@@ -76,31 +61,38 @@ export function VisualList({ values }: Props) {
 
   return (
     <Box>
-      <Box position="relative" flexDirection="row" alignItems="flex-end">
-        {values?.map((item, index) => (
-          <Box
-            bottom={0}
-            position="absolute"
-            left={sorted && sorted?.indexOf(item) * 20}
-            key={index}
-            height={parseInt(item)}
-            width={20}
-            className={classNames(
-              completed
-                ? classes.root3
-                : (sorted && sorted?.indexOf(item) === j) ||
-                  (sorted && sorted?.indexOf(item) === j + 1)
-                  ? classes.root
-                  : classes.root2,
-            )}
-          />
+      <Box display="flex" justifyContent="center" alignItems="center">
+
+        <Box position="relative" flexDirection="row" mb={3} className={classes.container} width={values && values?.length * 20} height={200}>
 
 
-        ))}
+          {values?.map((item, index) => (
+            <Box
+              bottom={0}
+              position="absolute"
+              left={sorted && sorted?.indexOf(item) * 20}
+              key={index}
+              height={parseInt(item)}
+              width={20}
+              className={classNames(
+                completed
+                  ? classes.root3
+                  : (sorted && sorted?.indexOf(item) === j) ||
+                    (sorted && sorted?.indexOf(item) === j + 1)
+                    ? classes.root
+                    : classes.root2,
+              )}
+            />
+
+
+          ))}
+        </Box>
       </Box>
-      {values && values.length > 0 && !completed && (
+      <Box my={4}>
+
         <Button onClick={bubbleSort}>Bubble Sort</Button>
-      )}
-    </Box>
+
+      </Box>
+    </Box >
   )
 }

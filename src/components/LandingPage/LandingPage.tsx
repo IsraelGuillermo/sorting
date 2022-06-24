@@ -13,7 +13,7 @@ export function LandingPage() {
   // }
 
   return (
-    <Box width={"100VW"} height={"100vh"} display="flex" justifyContent="center" alignItems="center">
+    <Box height={"100vh"} display="flex" justifyContent="center" alignItems="center">
       {submitted ? (<VisualList values={values} />) : (<ListInput setSubmitted={setSubmitted} input={input} setInput={setInput} setValues={setValues} values={values} />)}
     </Box>
   )
