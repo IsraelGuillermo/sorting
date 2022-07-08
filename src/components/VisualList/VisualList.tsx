@@ -51,8 +51,8 @@ export function VisualList({ values }: Props) {
         setJ(j)
         await delay(300)
         if (parseInt(arr[j]) > parseInt(arr[j + 1])) {
-          setSorted(arr)
-            ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+          setSorted(arr);
+          [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
         }
       }
     }
