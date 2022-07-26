@@ -1,1 +1,1 @@
-export { VisualList } from "./VisualList"
+export { BubbleVisualList } from "./BubbleVisualList"

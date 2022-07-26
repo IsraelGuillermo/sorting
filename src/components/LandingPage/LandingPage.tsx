@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { ListInput } from "../ListInput";
-import { VisualList } from "../VisualList";
+import { VisualList } from "../VisualList/VisualList";
+
 
 export function LandingPage() {
   const [input, setInput] = useState("")

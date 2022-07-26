@@ -1,12 +1,8 @@
-
-import { LandingPage } from "../LandingPage"
-
-
+import { SortingVisualizer } from "../SortingVisualizer";
 
 export function App() {
   return (
- 
- <LandingPage/>
-  
+    <SortingVisualizer></SortingVisualizer>
+
   )
 }

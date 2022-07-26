@@ -11,26 +11,19 @@ interface Props {
 export function ListInput({ values, setValues, setSubmitted }: Props) {
 
 
-  // function addValues(value: string) {
-  //   if (value === "") return
-  //   setValues([...values, value])
-  // }
-
   function generateArray(value: number) {
     const randomArr: string[] = []
     const min = 15
     const max = 150
     const difference = max - min
     for (let i = 0; i <= value; i++) {
-      console.log(randomArr)
       const randomNum = Math.floor((Math.random() * difference)).toString()
-      // values && setValues([...values, (Math.floor(Math.random())).toString()]);
+
       if (!randomArr.includes(randomNum) && parseInt(randomNum) > 15)
         randomArr.push(randomNum)
     }
-    setValues(randomArr)
+    randomArr.length > 5 && setValues(randomArr)
   }
-  console.log(values)
   return (
     <>
       <Box display="flex" justifySelf="center" alignSelf="center">

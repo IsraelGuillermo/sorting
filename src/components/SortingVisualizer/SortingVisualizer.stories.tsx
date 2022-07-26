@@ -1,6 +1,5 @@
 import decoratorCentered from "@storybook/addon-centered"
-import { BubbleVisualList } from "./BubbleVisualList"
-
+import { SortingVisualizer } from "./SortingVisualizer"
 
 /**
  * See Storybook Docs: Writing Stories
@@ -8,8 +7,8 @@ import { BubbleVisualList } from "./BubbleVisualList"
  */
 
 export default {
-  title: "VisualList",
+  title: "SortingVisualizer",
   decorators: [decoratorCentered],
 }
 
-export const Example = () => <BubbleVisualList />
+export const Example = () => <SortingVisualizer />

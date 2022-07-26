@@ -1,7 +1,7 @@
-import { VisualList } from "./VisualList"
+import { BubbleVisualList } from "./BubbleVisualList"
 
 describe("VisualList", () => {
-  it("is defined", expect(VisualList).toBeDefined)
+  it("is defined", expect(BubbleVisualList).toBeDefined)
 
   it.todo(`add meaningful tests 👍`)
 })
