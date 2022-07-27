@@ -123,30 +123,37 @@ export function SortingVisualizer() {
         for (let j = i + 1; j < n; j++) {
           arrayBars[min].style.backgroundColor = secondaryColor;
           arrayBars[j].style.backgroundColor = secondaryColor;
-          await delay(590)
+          await delay(30)
           if (sortedArr[j] < sortedArr[min]) {
+            arrayBars[min].style.backgroundColor = primaryColor;
             min = j;
             arrayBars[i].style.backgroundColor = primaryColor;
-          }
-          arrayBars[min].style.backgroundColor = primaryColor;
+            arrayBars[min].style.backgroundColor = secondaryColor;
 
+
+          }
+          arrayBars[i].style.backgroundColor = primaryColor;
+          arrayBars[min].style.backgroundColor = primaryColor;
           arrayBars[j].style.backgroundColor = primaryColor;
         }
         if (min !== i) {
           const temp = sortedArr[i];
+          const tempMinHeight = arrayBars[i].style.height
+          const tempMaxHeight = arrayBars[min].style.height
           sortedArr[i] = sortedArr[min];
           sortedArr[min] = temp
-
+          arrayBars[min].style.height = tempMinHeight
+          arrayBars[i].style.height = tempMaxHeight
         }
 
 
-        setCompleted(true)
-        return sortedArr
+
 
       }
 
-
-      return
+      console.log(sortedArr)
+      setCompleted(true)
+      return sortedArr
     }
     selectionSortHelper(array)
 
