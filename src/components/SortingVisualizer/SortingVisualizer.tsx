@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import { getMergeSortAnimations } from "../../utils/SortingAlgorithms/sortingAlgorithms";
+
 import "./SortingVisualizer.css"
 export function SortingVisualizer() {
   const AnimationSpeed = 5;
-  const numberOfArrayBars = 300;
+  const numberOfArrayBars = 10;
   const primaryColor = '#83c5be';
   const secondaryColor = "#d62828"
   const completedColor = "#489fb5"
   const [completed, setCompleted] = useState(false)
   const [isSorting, setIsSorting] = useState(false)
+  const [array, setArray] = useState<number[]>([])
   useEffect(() => {
 
     const resetArray = () => {
@@ -22,7 +24,9 @@ export function SortingVisualizer() {
     }
     resetArray()
   }, [])
-  const [array, setArray] = useState<number[]>([])
+  const delay = (time: number) => {
+    return new Promise((resolve) => setTimeout(resolve, time))
+  }
   const resetArray = () => {
     setIsSorting(false)
     setCompleted(false)
@@ -71,6 +75,83 @@ export function SortingVisualizer() {
     }
   }
 
+  const handleBubbleSort = () => {
+    const bubbleSortHelper = async (arr: number[]) => {
+      setIsSorting(true)
+      const sortedArr = arr.slice()
+      if (sortedArr.length === 1) return sortedArr
+      const arrayBars = document.getElementsByClassName("array-bar") as HTMLCollectionOf<HTMLElement>;
+      for (let i = 0; i < sortedArr.length; i++) {
+        for (let j = 0; j < sortedArr.length - i - 1; j++) {
+
+          arrayBars[j].style.backgroundColor = secondaryColor
+          arrayBars[j + 1].style.backgroundColor = secondaryColor
+          await delay(35)
+
+          if (sortedArr[j] > sortedArr[j + 1]) {
+            const tempMaxHeight = arrayBars[j].style.height;
+            const tempSmallerHeight = arrayBars[j + 1].style.height;
+            arrayBars[j].style.height = tempSmallerHeight;
+            arrayBars[j + 1].style.height = tempMaxHeight;
+            [sortedArr[j], sortedArr[j + 1]] = [sortedArr[j + 1], sortedArr[j]]
+
+
+
+          }
+          arrayBars[j].style.backgroundColor = primaryColor;
+          arrayBars[j + 1].style.backgroundColor = primaryColor;
+        }
+      }
+      setCompleted(true)
+      return
+    }
+    bubbleSortHelper(array)
+  }
+
+  const handleSelectionSort = () => {
+    const selectionSortHelper = async (arr: number[]) => {
+
+      setIsSorting(true)
+      const sortedArr = arr.slice()
+      console.log({ arr })
+      if (sortedArr.length === 1) return sortedArr
+      const arrayBars = document.getElementsByClassName("array-bar") as HTMLCollectionOf<HTMLElement>;
+      const n = sortedArr.length
+
+      for (let i = 0; i < n; i++) {
+        let min = i
+        for (let j = i + 1; j < n; j++) {
+          arrayBars[min].style.backgroundColor = secondaryColor;
+          arrayBars[j].style.backgroundColor = secondaryColor;
+          await delay(590)
+          if (sortedArr[j] < sortedArr[min]) {
+            min = j;
+            arrayBars[i].style.backgroundColor = primaryColor;
+          }
+          arrayBars[min].style.backgroundColor = primaryColor;
+
+          arrayBars[j].style.backgroundColor = primaryColor;
+        }
+        if (min !== i) {
+          const temp = sortedArr[i];
+          sortedArr[i] = sortedArr[min];
+          sortedArr[min] = temp
+
+        }
+
+
+        setCompleted(true)
+        return sortedArr
+
+      }
+
+
+      return
+    }
+    selectionSortHelper(array)
+
+  }
+
   return (<>
     <div className="array-container">
       {array.map((value, idx) => (
@@ -79,6 +160,8 @@ export function SortingVisualizer() {
 
       <button disabled={isSorting && !completed} onClick={resetArray}>Generate New Array</button>
       <button disabled={isSorting} onClick={handleMergeSort}>Merge Sort</button>
+      <button disabled={isSorting} onClick={handleBubbleSort}>Bubble Sort</button>
+      <button disabled={isSorting} onClick={handleSelectionSort}>Selection Sort</button>
 
 
 

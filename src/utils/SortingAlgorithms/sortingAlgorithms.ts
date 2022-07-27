@@ -23,7 +23,6 @@ const doMerge = (mainArray: number[], startIdx: number, middleIdx: number, endId
         animations.push([i, j])
         animations.push([i, j])
         if (auxiliaryArray[i] <= auxiliaryArray[j]) {
-
             animations.push([k, auxiliaryArray[i]]);
             mainArray[k++] = auxiliaryArray[i++]
         } else {
@@ -44,3 +43,5 @@ const doMerge = (mainArray: number[], startIdx: number, middleIdx: number, endId
         mainArray[k++] = auxiliaryArray[j++]
     }
 }
+
+

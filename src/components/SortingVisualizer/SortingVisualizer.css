@@ -1,11 +1,13 @@
 .array-bar {
-    width: 4px;
+    width: 5px;
     display: inline-block;
     margin: 0 1px;
-
+    transition: all, .5s, step-end, ease-in-out;
+    /* transition-timing-function: ease; */
 }
 
 .array-container {
     position: absolute;
     left: 200px;
+    top: 200px;
 }
